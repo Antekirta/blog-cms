@@ -6,6 +6,7 @@
   "scripts": {
     "start:admin": "webpack-dev-server --config admin/build/webpack.config.js",
     "start:app": "webpack --config app/build/webpack.config.dev.js",
+    "start:app:ssr": "webpack --config app/build/webpack.config.server.js",
     "serve:dev": "webpack-dev-server --hot --config app/build/webpack.config.dev.js",
     "serve:prod": "node app/server.js"
   },
