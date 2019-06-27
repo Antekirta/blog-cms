@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:admin": "webpack-dev-server --config admin/build/webpack.config.js"
+    "start:admin": "webpack-dev-server --config admin/build/webpack.config.js",
+    "start:app": "webpack --config app/build/webpack.config.dev.js",
+    "serve:dev": "webpack-dev-server --hot --config app/build/webpack.config.dev.js",
+    "serve:prod": "node app/server.js"
   },
   "keywords": [],
   "author": "",
@@ -13,17 +15,24 @@
   "dependencies": {
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.7",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "mini-css-extract-plugin": "^0.7.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "sass": "^1.21.0",
     "typescript": "^3.5.1",
-    "webpack": "^4.33.0",
+    "webpack": "^4.35.2",
     "webpack-cli": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "@types/ejs": "^2.6.3",
+    "@types/express": "^4.17.0",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "awesome-typescript-loader": "^5.2.1",
