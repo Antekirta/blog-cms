@@ -1,8 +1,6 @@
 const path = require('path')
 import express from 'express'
-import React from 'react'
-import {renderToString} from 'react-dom/server'
-import App from '../components/App/App'
+import {indexRoute} from "./routes"
 
 const app = express()
 
@@ -13,12 +11,10 @@ app.set('views', 'app/views')
 
 app.use(express.static(path.resolve(process.cwd(), 'app/dist')))
 
-app.get('/', (req, res) => {
-    res.render('index', {
-        App: renderToString(<App />)
-    })
-})
+app.get('/', indexRoute)
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("Server is listening")
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
+    console.log("Server is listening on port " + port)
 })

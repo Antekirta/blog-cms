@@ -6,7 +6,7 @@
   "scripts": {
     "start:admin": "webpack-dev-server --config admin/build/webpack.config.js",
     "start:app": "webpack --config app/build/webpack.config.dev.js",
-    "start:app:ssr": "webpack --config app/build/webpack.config.server.js",
+    "start:app:ssr": "webpack --config app/build/webpack.config.build.js",
     "serve:dev": "webpack-dev-server --hot --config app/build/webpack.config.dev.js",
     "serve:prod": "node app/server.js"
   },
@@ -18,6 +18,7 @@
     "@types/node": "^12.0.7",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
+    "dotenv": "^8.0.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "mini-css-extract-plugin": "^0.7.0",
@@ -33,7 +34,7 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@types/ejs": "^2.6.3",
-    "@types/express": "^4.17.0",
+    "@types/express": "types/npm-express",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "awesome-typescript-loader": "^5.2.1",
@@ -44,6 +45,7 @@
     "sass-loader": "^7.1.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
-    "webpack-dev-server": "^3.7.1"
+    "webpack-dev-server": "^3.7.1",
+    "webpack-merge": "^4.2.1"
   }
 }

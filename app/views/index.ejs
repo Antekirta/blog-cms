@@ -8,12 +8,16 @@
               content="ie=edge">
         <title>EJS!</title>
 
+        <% if(ssr) { %>
         <link rel="stylesheet"
               href="/main.css"/>
+        <% } %>
     </head>
     <body>
         <div id="root"><%- App %></div>
 
-        <script src="/index-bundle.js"></script>
+        <% if(ssr) { %>
+        <script src="/main.js"></script>
+        <% } %>
     </body>
 </html>

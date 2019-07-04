@@ -1,38 +1,16 @@
 const path = require('path')
 const webpack = require('webpack')
+const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const baseConfig = require('./webpack.config.base')
 
 const browserConfig = {
   mode: 'development',
 
-  context: path.resolve(__dirname, '../'),
-
   entry: './src/browser/index.tsx',
-
-  output: {
-    path: path.join(__dirname, '../dist'),
-    publicPath: '/',
-    filename: 'index-bundle.js'
-  },
-
-  devtool: 'source-map',
 
   module: {
     rules: [
-      {
-        test: /\.tsx?$/,
-        include: [
-          path.resolve(__dirname, '../src')
-        ],
-        loader: 'awesome-typescript-loader'
-      },
-
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'source-map-loader'
-      },
       {
         test: /\.css$/,
         use: [
@@ -49,19 +27,6 @@ const browserConfig = {
         ]
       }
     ]
-  },
-
-  resolve: {
-    modules: [
-      'node_modules',
-      path.resolve(__dirname, '../src')
-    ],
-    extensions: ['.ts', '.tsx', '.js', '.json', 'css', 'sass']
-  },
-
-  externals: {
-    React: 'react',
-    ReactDOM: 'react-dom'
   },
 
   devServer: {
@@ -83,10 +48,11 @@ const browserConfig = {
                             filename: path.join(__dirname, '../public/index.html'),
                             template: path.join(__dirname, '../views/index.ejs'),
                             templateParameters: {
-                              App: '<App />'
+                              App: '<App />',
+                              ssr: false
                             }
                           })
   ]
 }
 
-module.exports = browserConfig
+module.exports = merge(baseConfig, browserConfig)
