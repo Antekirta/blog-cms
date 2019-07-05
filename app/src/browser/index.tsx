@@ -1,6 +1,6 @@
 import React from 'react'
 import {hydrate} from 'react-dom'
-import {BrowserRouter} from "react-router-dom"
-import App from '../shared/components/App/App'
+import {baseMarkup} from "../shared/baseMarkup"
+import '../shared/styles/base.sass'
 
-hydrate(<BrowserRouter><App/></BrowserRouter>, document.getElementById('root'))
+hydrate(baseMarkup, document.getElementById('root'))

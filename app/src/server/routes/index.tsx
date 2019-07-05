@@ -1,23 +1,24 @@
+const path = require('path')
 import express from 'express'
 
-import React from 'react'
-import {StaticRouter} from 'react-router-dom'
-import {renderToString} from "react-dom/server"
-import App from '../../shared/components/App/App'
+import {ArticleModel} from "../../../../backend/db/models/Article";
 
-const indexRoute = (req: express.Request, res: express.Response) => {
-    const context = {}
+import React from 'react'
+import {renderToString} from "react-dom/server"
+import {baseMarkup} from "../../shared/baseMarkup"
+
+const indexRoute = async (req: express.Request, res: express.Response) => {
+    const articles = await ArticleModel.find()
 
     res.render('index', {
-        App: renderToString(
-            <StaticRouter
-                location={req.url}
-                context={context}>
-                <App/>
-            </StaticRouter>
-        ),
-        ssr: true
+        App: renderToString(baseMarkup),
+        ssr: true,
+        articles
     })
 }
 
-export {indexRoute}
+const adminRoute = async (req: express.Request, res: express.Response) => {
+    res.sendFile(path.resolve(process.cwd(), 'admin/dist/index.html'))
+}
+
+export {indexRoute, adminRoute}

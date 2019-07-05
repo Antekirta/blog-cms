@@ -4,10 +4,14 @@ if (!!process.env.BROWSER === true) {
     require('./SiteHeader.sass')
 }
 
-export default class SiteHeader extends React.Component {
+class SiteHeader extends React.Component {
     render() {
         return (
-            <header className={'site-header'}>Site header!</header>
+            <header className={'site-header'}>
+                <h2>Site header!</h2>
+            </header>
         )
     }
 }
+
+export {SiteHeader}

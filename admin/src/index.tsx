@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import AdminHeader from './components/AdminHeader/AdminHeader'
+import {App} from "./components/App/App";
 
-ReactDOM.render(<AdminHeader />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))

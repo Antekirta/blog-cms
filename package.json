@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:admin": "webpack-dev-server --config admin/build/webpack.config.js",
+    "start:admin": "webpack --config admin/build/webpack.config.js",
     "start:app": "webpack --config app/build/webpack.config.dev.js",
     "start:app:ssr": "webpack --config app/build/webpack.config.build.js",
     "serve:dev": "webpack-dev-server --hot --config app/build/webpack.config.dev.js",
-    "serve:prod": "node app/server.js"
+    "serve:prod": "nodemon app/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/body-parser": "^1.17.0",
     "@types/jest": "^24.0.13",
+    "@types/lodash": "^4.14.135",
+    "@types/mongoose": "^5.5.7",
     "@types/node": "^12.0.7",
     "@types/react-router-dom": "^4.3.4",
     "body-parser": "^1.19.0",
@@ -22,17 +25,23 @@
     "dotenv": "^8.0.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
+    "lodash": "^4.17.11",
     "mini-css-extract-plugin": "^0.7.0",
+    "mongoose": "^5.6.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
+    "reflect-metadata": "^0.1.13",
     "sass": "^1.21.0",
+    "typegoose": "^5.7.2",
     "typescript": "^3.5.1",
     "webpack": "^4.35.2",
     "webpack-cli": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@types/ejs": "^2.6.3",
@@ -48,6 +57,7 @@
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
     "webpack-dev-server": "^3.7.1",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2"
   }
 }

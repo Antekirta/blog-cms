@@ -2,7 +2,9 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const nodeExternals = require('webpack-node-externals')
 const baseConfig = require('./webpack.config.base')
+
 
 const browserConfig = {
   mode: 'production',
@@ -49,7 +51,7 @@ const browserConfig = {
 }
 
 const serverConfig = {
-  entry: './src/server/index.ts',
+  entry: './src/server/server.ts',
 
   target: "node",
 
@@ -59,7 +61,19 @@ const serverConfig = {
     libraryTarget: "commonjs2"
   },
 
+  externals: [
+    {
+      React: 'react',
+      ReactDOM: 'react-dom'
+    },
+    nodeExternals()
+  ],
+
   watch: true,
+
+  watchOptions: {
+    ignored: /node_modules/
+  },
 
   plugins: [
     new webpack.DefinePlugin({

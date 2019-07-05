@@ -3,9 +3,9 @@ import React from 'react'
 class HomePage extends React.Component {
     render() {
         return (
-            <main>
+            <div>
                 <h1>Home page</h1>
-            </main>
+            </div>
         )
     }
 }

@@ -10,6 +10,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, '../dist'),
+    publicPath: '/',
     filename: 'index-bundle.js'
   },
 
@@ -48,6 +49,7 @@ module.exports = {
 
   plugins: [
     new HTMLWebpackPlugin({
+                            filename: path.resolve(__dirname, '../dist/index.html'),
                             template: path.resolve(__dirname, '../public/index.html')
                           })
   ],

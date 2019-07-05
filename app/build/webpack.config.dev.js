@@ -48,7 +48,7 @@ const browserConfig = {
                             filename: path.join(__dirname, '../public/index.html'),
                             template: path.join(__dirname, '../views/index.ejs'),
                             templateParameters: {
-                              App: '<App />',
+                              App: '<HomePage />',
                               ssr: false
                             }
                           })
