@@ -11,7 +11,7 @@ app.set('views', 'app/views')
 
 app.use(express.static(path.resolve(process.cwd(), 'app/dist')))
 
-app.get('/', indexRoute)
+app.get('*', indexRoute)
 
 const port = process.env.PORT || 3000
 
