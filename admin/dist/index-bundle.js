@@ -30126,10 +30126,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROUTES", function() { return ROUTES; });
 const ROUTES = {
     MAIN: '/',
-
     ADMIN_PANEL: '/admin-panel',
-
     COLLECTION: '/rest/collection',
+    DOCUMENT: '/rest/document',
+    DOCUMENTS_OF_COLLECTION: '/rest/document/:collectionName',
 
     ARTICLE: '/rest/article'
 }
@@ -30257,10 +30257,10 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     render() {
         return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], null,
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: 'app' },
-                react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Blog CMS"),
+                react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Smth"),
                 react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminNavigation_AdminNavigation__WEBPACK_IMPORTED_MODULE_3__["AdminNavigation"], null)),
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], { exact: true, path: '/admin-panel', component: _pages_AdminHome_AdminHome__WEBPACK_IMPORTED_MODULE_2__["AdminHome"] }),
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], { path: '/admin-panel/records-list', component: _pages_RecordsList_RecordsList__WEBPACK_IMPORTED_MODULE_4__["RecordsList"] })));
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], { path: '/admin-panel/records-list', render: () => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_RecordsList_RecordsList__WEBPACK_IMPORTED_MODULE_4__["RecordsList"], { collectionName: 'articles' }) })));
     }
 }
 
@@ -30326,11 +30326,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RecordsList", function() { return RecordsList; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _providers_documentsProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../providers/documentsProvider */ "./src/providers/documentsProvider.ts");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "../node_modules/react-router-dom/esm/react-router-dom.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
 
 class RecordsList extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            records: []
+        };
+        this.getDocumentsOfCollection();
+    }
     render() {
         return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: 'records-list' },
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Records list")));
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Records list"),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", { className: 'records-list__list' }, this.state.records.map(record => {
+                return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", { key: record._id.toString(), className: "records-list__item" },
+                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], { to: '/admin-panel' }, record.title)));
+            }))));
+    }
+    getDocumentsOfCollection() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const records = yield Object(_providers_documentsProvider__WEBPACK_IMPORTED_MODULE_1__["getDocumentsOfCollection"])(this.props.collectionName);
+            this.setState({
+                records
+            });
+        });
     }
 }
 
@@ -30360,6 +30391,35 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 const getCollectionsNames = () => __awaiter(undefined, void 0, void 0, function* () {
     const response = yield fetch(_shared_registry_ROUTES__WEBPACK_IMPORTED_MODULE_0__["ROUTES"].COLLECTION);
+    return yield response.json();
+});
+
+
+
+/***/ }),
+
+/***/ "./src/providers/documentsProvider.ts":
+/*!********************************************!*\
+  !*** ./src/providers/documentsProvider.ts ***!
+  \********************************************/
+/*! exports provided: getDocumentsOfCollection */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDocumentsOfCollection", function() { return getDocumentsOfCollection; });
+/* harmony import */ var _shared_registry_ROUTES__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../shared/registry/ROUTES */ "../shared/registry/ROUTES.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+const getDocumentsOfCollection = (collectionName) => __awaiter(undefined, void 0, void 0, function* () {
+    const response = yield fetch(`${_shared_registry_ROUTES__WEBPACK_IMPORTED_MODULE_0__["ROUTES"].DOCUMENT}/${collectionName}`);
     return yield response.json();
 });
 

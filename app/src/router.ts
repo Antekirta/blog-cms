@@ -1,6 +1,7 @@
 import express from 'express'
 import {createArticle, deleteArticle, getArticle, updateArticle} from "../../backend/REST/articles"
 import {getCollectionsNames} from "../../backend/REST/collections"
+import {getDocumentsOfCollection} from "../../backend/REST/documents";
 import {indexRoute, adminRoute} from "./server/routes"
 import {ROUTES} from "../../shared/registry/ROUTES"
 
@@ -15,6 +16,8 @@ const setupRoutes = (app: express.Application) => {
     app.delete(`${ROUTES.ARTICLE}`, deleteArticle)
 
     app.get(ROUTES.COLLECTION, getCollectionsNames)
+
+    app.get(ROUTES.DOCUMENTS_OF_COLLECTION, getDocumentsOfCollection)
 }
 
 export {setupRoutes}

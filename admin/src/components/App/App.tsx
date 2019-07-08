@@ -9,13 +9,13 @@ class App extends React.Component {
         return (
             <BrowserRouter>
                 <div className={'app'}>
-                    <h1>Blog CMS</h1>
+                    <h1>Smth</h1>
 
                     <AdminNavigation />
                 </div>
 
                 <Route exact path={'/admin-panel'} component={AdminHome}></Route>
-                <Route path={'/admin-panel/records-list'} component={RecordsList}></Route>
+                <Route path={'/admin-panel/records-list'} render={() => <RecordsList collectionName={'articles'}></RecordsList>}></Route>
             </BrowserRouter>
         )
     }
