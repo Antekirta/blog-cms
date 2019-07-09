@@ -33,7 +33,7 @@ class RecordsList extends React.Component<Props, State> {
                             <li key={record._id.toString()}
                                 className="records-list__item">
                                 <Link
-                                    to={'/admin-panel'}>{record.title}</Link>
+                                    to={'/admin-panel/edit'}>{record.title}</Link>
                             </li>
                         )
                     })}

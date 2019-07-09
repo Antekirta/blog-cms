@@ -21,9 +21,20 @@ module.exports = {
       {
         test: /\.tsx?$/,
         include: [
-          path.resolve(__dirname, '../src')
+          path.resolve(__dirname, '../src'),
+          path.resolve(__dirname, '../../backend'),
+          path.resolve(__dirname, '../../shared')
         ],
-        loader: 'awesome-typescript-loader'
+        use: [
+          {
+            loader: 'awesome-typescript-loader',
+            options: {
+              useCache: true,
+              isolatedModules: true,
+              reportFiles: true
+            }
+          }
+        ]
       },
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'

@@ -14,8 +14,9 @@ module.exports = {
       {
         test: /\.tsx?$/,
         include: [
+          path.resolve(__dirname, '../../shared'),
           path.resolve(__dirname, '../src'),
-          path.resolve(__dirname, '../../backend'),
+          path.resolve(__dirname, '../../backend')
         ],
       use: [
         {
@@ -41,7 +42,9 @@ module.exports = {
   resolve: {
     modules: [
       'node_modules',
-      path.join(__dirname, '../src')
+      path.join(__dirname, '../src'),
+      path.resolve(__dirname, '../../backend'),
+      path.resolve(__dirname, '../../shared')
     ],
     extensions: ['.ts', '.tsx', '.js', '.css', '.sass', '.json']
   },

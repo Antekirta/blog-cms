@@ -1,3 +1,5 @@
+import * as mongoose from "mongoose";
+
 interface ICollection {
     name: string
     type: 'collection'
@@ -9,4 +11,10 @@ interface ICollection {
     idIndex: any
 }
 
-export {ICollection}
+interface ISchema extends mongoose.Schema {
+    paths: {
+        [key: string]: any
+    }
+}
+
+export {ICollection, ISchema}

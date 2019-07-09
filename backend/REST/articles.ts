@@ -20,10 +20,13 @@ const getArticle = async (req: express.Request, res: express.Response) => {
 const createArticle = async (req: express.Request, res: express.Response) => {
     const {body} = req as any
 
+    console.log('body: ', body)
+
     const article: IArticle = {
         title: body.title,
         description: body.description,
-        content: body.content
+        content: body.content,
+        showOnMainPage: body.showOnMainPage
     }
 
     await new ArticleModel(article).save()

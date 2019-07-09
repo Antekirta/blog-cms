@@ -7,7 +7,7 @@ const baseConfig = require('./webpack.config.base')
 
 
 const browserConfig = {
-  mode: 'production',
+  mode: process.env.NODE_ENV || 'development',
 
   entry: './src/browser/index.tsx',
 

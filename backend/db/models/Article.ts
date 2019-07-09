@@ -1,32 +1,47 @@
-import {Typegoose, prop, ModelType, InstanceType} from "typegoose"
 import {MODELS} from "../registry/MODELS"
 import * as mongoose from 'mongoose'
+import {modelsManager} from "../utils/models-manager"
+import {CUSTOM_SCHEMA_TYPES} from "../../../shared/registry/SCHEMA_TYPES"
 
 interface IArticle {
     _id?: mongoose.Schema.Types.ObjectId // it's automatically added by Mongo
-    title: string,
-    description: string
-    content: string
-}
-
-class Article extends Typegoose implements IArticle {
-    @prop()
     title: string
-
-    @prop()
     description: string
-
-    @prop()
     content: string
+    showOnMainPage: boolean
 }
 
-const ArticleModel = new Article().getModelForClass(Article, {
-    schemaOptions: {
-        collection: MODELS.ARTICLES
+const articleSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        unique: true,
+        label: 'Заголовок'
+    },
+    description: {
+        type: String,
+        customType: CUSTOM_SCHEMA_TYPES.HTML,
+        // required: true,
+        label: 'Описание'
+    },
+    content: {
+        type: String,
+        // required: true,
+        label: 'Текст'
+    },
+    showOnMainPage: {
+        type: Boolean,
+        label: 'Показывать на главной странице'
     }
 })
 
-// Is ModelType<any> correct?
-mongoose.model('articles', new Article() as ModelType<any>)
+articleSchema.statics.modelNameRus = function () {
+    return 'Статьи'
+}
+
+const ArticleModel = mongoose.model(MODELS.ARTICLES, articleSchema)
+
+// You must register all the models!
+modelsManager.register(MODELS.ARTICLES, articleSchema)
 
 export {IArticle, ArticleModel}
